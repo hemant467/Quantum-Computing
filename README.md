@@ -3,6 +3,10 @@
 
 ---
 
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Quantum+Computing+@+IIT-Tirupati;Structured+Computational+Exploration&font=Fira%20Code&color=%23FF8C00&center=true&width=700&height=120&size=26">
+
+---
+
 ## Abstract
 
 This repository presents a structured computational exploration of fundamental concepts in Quantum Computing.  
@@ -181,3 +185,7 @@ Independent Research Enthusiast – Quantum Computing & Advanced Computational S
 *“Scientific progress begins with disciplined curiosity.”*
 
 <img width="1545" height="2000" alt="Entry Pass IIT Tirupati HEMANT KATTA" src="https://github.com/user-attachments/assets/bc314cdb-a5b6-47e5-82eb-512dea652895" />
+
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Quantum+Computing+@+IIT-Tirupati;Structured+Computational+Exploration&font=Fira%20Code&color=%23FFD700&center=true&width=700&height=120&size=26">
+
+<p align="center"><a href="https://github.com/hemant467/Quantum-Computing">Quantum</a></p>
