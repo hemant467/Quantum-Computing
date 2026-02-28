@@ -186,6 +186,6 @@ Independent Research Enthusiast – Quantum Computing & Advanced Computational S
 
 <img width="1545" height="2000" alt="Entry Pass IIT Tirupati HEMANT KATTA" src="https://github.com/user-attachments/assets/bc314cdb-a5b6-47e5-82eb-512dea652895" />
 
-<img src="https://readme-typing-svg.herokuapp.com/?lines=Quantum+Computing+@+IIT-Tirupati;Structured+Computational+Exploration&font=Fira%20Code&color=%23FFD700&center=true&width=700&height=120&size=26">
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Quantum+Computing+@+IIT-Tirupati;Structured+Computational+Exploration;Under+the+Guidance+of+Dr.+J.+Senthil+Kumar&font=Fira%20Code&color=%23FFD700&center=true&width=900&height=130&size=24">
 
 <p align="center"><a href="https://github.com/hemant467/Quantum-Computing">Quantum</a></p>
