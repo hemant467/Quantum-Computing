@@ -58,6 +58,15 @@ Quantum_iisc/
 └── README.md             # Academic documentation
 ```
 
+```
+Quantum-Computing/
+│
+├── codes/
+│   └── quantum_computing_iit_tirupati.py
+├── Quantum_iisc.ipynb
+└── README.md
+```
+
 The notebook is organized sequentially to reflect theoretical progression.
 
 ---
@@ -115,23 +124,35 @@ Potential extensions include:
 
 ## 8. Installation
 
-Clone the repository:
+🔹 Launch the notebook
 
 ```bash
-git clone https://github.com/hemant467/Quantum_iisc.git
-cd Quantum_iisc
+jupyter notebook
 ```
 
-Install dependencies:
+🔹 Clone the Repository
+
+```bash
+git clone https://github.com/hemant467/Quantum-Computing.git
+cd Quantum-Computing
+```
+
+🔹 Navigate to the Code Directory
+
+```bash
+cd "📟 Codes 📜"
+```
+
+🔹 Install dependencies
 
 ```bash
 pip install numpy matplotlib jupyter
 ```
 
-Launch the notebook:
+🔹 Run the Python File
 
 ```bash
-jupyter notebook
+python quantum_computing_iit_tirupati.py
 ```
 
 ---
@@ -139,6 +160,14 @@ jupyter notebook
 ## 9. Conclusion
 
 This project provides a mathematically grounded, implementation-focused study of quantum computational principles. It is designed to cultivate rigorous intuition and prepare learners for advanced quantum algorithm development and research exploration.
+
+---
+
+## 10. References
+
+1. Nielsen, M. A., & Chuang, I. L. *Quantum Computation and Quantum Information*.  
+2. Preskill, J. *Lecture Notes on Quantum Computation*.  
+3. Dirac, P. A. M. *The Principles of Quantum Mechanics*.
 
 ---
 
