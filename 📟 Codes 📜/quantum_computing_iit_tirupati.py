@@ -94,8 +94,11 @@ qc.draw()
 
 """## Deutsch Algorithm Function"""
 
+!pip install qiskit --quiet
+!pip install pylatexenc --quiet
+
 from qiskit import QuantumCircuit
-from qiskt.quantum_info import Statevector
+from qiskit.quantum_info import Statevector
 
 # Deutsch Algorithm Function
 
@@ -103,3 +106,469 @@ def deutsch_algorithm(oracle_fn):
     qc = QuantumCircuit(2,1) # 2qubits, 1 classical bit
 
     # Step 1: Prepare |0>|1>
+    qc.x(1) # Put second qubit in |1>
+
+    # Step 2: Apply Hadamards to both qubits
+    qc.h(0)
+    qc.h(1)
+
+    # Step 3: Apply oracle
+    oracle_fn(qc)
+
+    # Step 4: Apply Hadamard to first qubit
+    qc.h(0)
+
+    # Step 5: Measure first qubit
+    qc.measure(0,0)
+    return qc
+
+    # Constant function f(x) = 0
+    def oracle_constant_0(qc):
+        # Does nothing
+        pass
+
+    # Constant function f(x) = 1
+    def oracle_constant_1(qc):
+        qc.x(1) # Flip second qubit
+
+    # Balanced function f(x) = x
+    def oracle_balanced_1(qc):
+        qc.cx(0,1)
+
+    # Balanced function f(x) = NOT(x)
+    def oracle_balanced_2(qc):
+        qc.cx(0,1)
+        qc.x(1)
+
+    # Select an Oracle to TEST
+    # oracle = oracle_constant_0  # Constant
+    oracle = oracle_constant_1  # Constant
+    # oracle = oracle_balanced_1  # Balanced
+    # oracle = oracle_balanced_2  # Balanced
+
+    # Build Circuit
+
+    qc = deutsch_algorithm(oracle)
+
+    print("Deutsch Algorithm Circuit: ")
+    display(qc.draw('mpl'))
+
+    # Remove measurements for statevector
+    qc_sv = qc.remove_final_measurements(inplace=False)
+
+    state = Statevector.from_instruction(qc_sv)
+    probs = state.Probabilities_dict()
+
+    print("\nStatevector Probabilities: ")
+    print(probs)
+
+    # Extract Probabilities of 1st qubit
+    p0=0
+    p1=0
+
+    for bitstring, prob in probs.items():
+        if bitstring[-1] == "0":
+            p0 += prob
+        else:
+            p1 += prob
+
+    print(f"\nP(first qubit = 0): {p0:.4f}")
+    print(f"\nP(first qubit = 1): {p1:.4f}")
+
+    # Final Classification
+    if p0 > p1:
+        print("\nRESULT: The function is CONSTANT")
+    else:
+        print("\nRESULT: The function is BALANCED")
+
+!pip install qiskit --quiet
+!pip install pylatexenc --quiet
+
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Statevector
+from IPython.display import display
+
+# ----------------------------
+# Deutsch Algorithm Function
+# ----------------------------
+def deutsch_algorithm(oracle_fn):
+    qc = QuantumCircuit(2, 1)
+
+    qc.x(1)          # |1>
+    qc.h(0)
+    qc.h(1)
+
+    oracle_fn(qc)
+
+    qc.h(0)
+    qc.measure(0, 0)
+
+    return qc
+
+
+# ----------------------------
+# Oracle Definitions
+# ----------------------------
+
+def oracle_constant_0(qc):
+    pass
+
+def oracle_constant_1(qc):
+    qc.x(1)
+
+def oracle_balanced_1(qc):
+    qc.cx(0, 1)
+
+def oracle_balanced_2(qc):
+    qc.cx(0, 1)
+    qc.x(1)
+
+
+# ----------------------------
+# Select Oracle
+# ----------------------------
+oracle = oracle_constant_1
+# oracle = oracle_balanced_1
+
+
+# ----------------------------
+# Run Algorithm
+# ----------------------------
+qc = deutsch_algorithm(oracle)
+
+print("Deutsch Algorithm Circuit:")
+display(qc.draw("mpl"))
+
+# Remove measurement for statevector
+qc_sv = qc.remove_final_measurements(inplace=False)
+
+state = Statevector.from_instruction(qc_sv)
+probs = state.probabilities_dict()
+
+print("\nStatevector Probabilities:")
+print(probs)
+
+# Extract first qubit probability
+p0 = 0
+p1 = 0
+
+for bitstring, prob in probs.items():
+    if bitstring[-1] == "0":
+        p0 += prob
+    else:
+        p1 += prob
+
+print(f"\nP(first qubit = 0): {p0:.4f}")
+print(f"P(first qubit = 1): {p1:.4f}")
+
+if p0 > p1:
+    print("\nRESULT: The function is CONSTANT")
+else:
+    print("\nRESULT: The function is BALANCED")
+
+# Install Qiskit if not already installed
+!pip install qiskit --quiet
+
+# Imports
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Statevector
+from IPython.display import display
+
+# ----------------------------
+# Deutsch Algorithm Function
+# ----------------------------
+def deutsch_algorithm(oracle_fn):
+    """
+    Runs Deutsch Algorithm on a 1-bit function oracle.
+
+    Parameters:
+        oracle_fn : function
+            The oracle function that modifies the circuit in place.
+
+    Returns:
+        qc : QuantumCircuit
+            Quantum circuit implementing Deutsch Algorithm.
+    """
+    qc = QuantumCircuit(2, 1)  # 2 qubits, 1 classical bit
+
+    # Step 1: Initialize |0>|1>
+    qc.x(1)  # Put second qubit in |1>
+
+    # Step 2: Apply Hadamard to both qubits
+    qc.h(0)
+    qc.h(1)
+
+    # Step 3: Apply Oracle
+    oracle_fn(qc)
+
+    # Step 4: Apply Hadamard to first qubit
+    qc.h(0)
+
+    # Step 5: Measure first qubit
+    qc.measure(0, 0)
+
+    return qc
+
+# ----------------------------
+# Oracle Definitions
+# ----------------------------
+def oracle_constant_0(qc):
+    # f(x) = 0, does nothing
+    pass
+
+def oracle_constant_1(qc):
+    # f(x) = 1, flip second qubit
+    qc.x(1)
+
+def oracle_balanced_1(qc):
+    # f(x) = x
+    qc.cx(0, 1)
+
+def oracle_balanced_2(qc):
+    # f(x) = NOT(x)
+    qc.cx(0, 1)
+    qc.x(1)
+
+# ----------------------------
+# Select Oracle
+# ----------------------------
+# Choose one of the four oracles
+oracle = oracle_constant_1   # Constant
+# oracle = oracle_constant_0   # Constant
+# oracle = oracle_balanced_1   # Balanced
+# oracle = oracle_balanced_2   # Balanced
+
+# ----------------------------
+# Build and Run Circuit
+# ----------------------------
+qc = deutsch_algorithm(oracle)
+
+# Display circuit (text-based for reliability)
+print("Deutsch Algorithm Circuit:")
+print(qc.draw())
+
+# Remove measurement for statevector simulation
+qc_sv = qc.remove_final_measurements(inplace=False)
+
+# Get statevector probabilities
+state = Statevector.from_instruction(qc_sv)
+probs = state.probabilities_dict()
+
+print("\nStatevector Probabilities:")
+for bitstring, prob in probs.items():
+    print(f"{bitstring}: {prob:.4f}")
+
+# Compute probability for first qubit
+p0 = sum(prob for bitstring, prob in probs.items() if bitstring[-1] == "0")
+p1 = sum(prob for bitstring, prob in probs.items() if bitstring[-1] == "1")
+
+print(f"\nP(first qubit = 0): {p0:.4f}")
+print(f"P(first qubit = 1): {p1:.4f}")
+
+# Classify function
+if p0 > p1:
+    print("\nRESULT: The function is CONSTANT")
+else:
+    print("\nRESULT: The function is BALANCED")
+
+"""# Simon's Algorithm"""
+
+!pip install qiskit qiskit-aer matplotlib pylatexenc --quiet
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Statevector
+import numpy as np
+
+"""<center><b>Secret Key ----> API Key</b></center>"""
+
+# Configuration
+n = 2
+s = "11"  # Hidden String
+
+# Helper to print state nicely
+def show_state(label, sv):
+    print(f"\n--- {label} ---")
+    vec = sv.data
+    for i,amp in enumerate(vec):
+        if abs(amp) > 1e-6:
+            print(f"|{format(i,'0'+str(2*n)+'b')}> : {amp}")
+
+# INITIAL STATE
+qc = QuantumCircuit(2*n, n)
+sv = Statevector.from_instruction(qc)
+show_state("Initial state |0...0>",sv) # INITIAL STATE lot's of 0's
+
+# STEP - 1 : HADAMARD on Inputs
+for i in range(n):
+    qc.h(i)
+
+sv = Statevector.from_instruction(qc)
+show_state("After first Hadamards", sv)
+
+# STEP - 2 :SIMON ORACLE
+# copy x into OUTPUT
+
+for i in range(n):
+    qc.cx(i, i+n)
+
+sv = Statevector.from_instruction(qc)
+show_state("After copying x to output", sv)
+
+# Intoduce hidden string dependency
+for i,bit in enumerate(s):
+    if bit == "1":
+        qc.cx(i,n)
+
+sv = Statevector.from_instruction(qc)
+show_state("After first Hadamards (interference)",sv)
+
+# STEP - 3 : SECOND HARDMARD
+for i in range(n):
+    qc.h(i)
+
+sv = Statevector.from_instruction(qc)
+show_state("After second Hadamards (interference)",sv)
+
+# FINAL Circuit
+print("\nFINAL Circuit:\n")
+print(qc.draw())
+
+"""# ERROR Correction
+
+There are 3 types of ERROR corrections :
+  - Bit
+  - Phase
+  - BOTH [ Bit + Phase ]
+"""
+
+from qiskit import QuantumCircuit
+from qiskit_aer import AerSimulator
+from qiskit import transpile
+from qiskit.visualization import plot_histogram
+import matplotlib.pyplot as plt
+
+# Create circuit
+# 3 data qubits + 2 ancilla for syndrome
+
+qc = QuantumCircuit(5,3)
+
+# STEP -1 : Prepare state
+qc.h(0) # HADAMARD GATE
+
+# STEP - 2 : Encode for bit-flip protection
+qc.cx(0,1)
+qc.cx(0,2)
+
+# STEP - 3 : Convert to phase-flip code
+# Apply H to all data qubits
+qc.h([0,1,2])
+
+# STEP - 4 : Introduce errors
+# Flip one bit and one phase
+qc.x(1) # bit flip on qubit 1
+qc.z(2) # phase flip on qubit 2
+
+qc.barrier()
+
+# STEP - 5 : Correct phase-flip
+# Convert phase errors to bit errors
+qc.h([0,1,2])
+
+# Syndrome detection for bit flips
+qc.cx(0,3)
+qc.cx(1,3)
+qc.cx(1,4)
+qc.cx(2,4)
+
+# CORRECT errors using Ancilla info
+qc.ccx(2,4,1)    # ccx : Control Control Gate of X
+qc.cx(3,0)       # cx : Control Gate of X
+qc.cx(4,2)
+qc.barrier()
+
+# STEP - 6 : Decode back to single qubit
+qc.cx(0,1)
+qc.cx(0,2)
+
+# Measure only logical qubit
+qc.measure(0,0)
+qc.measure(1,1)
+qc.measure(2,2)
+
+# Simulate
+sim = AerSimulator()
+tqc = transpile(qc, sim)
+result = sim.run(tqc, shots=1024).result()
+counts = result.get_counts()
+
+print("Measurement results: ",counts)
+print()
+
+plot_histogram(counts)
+plt.show()
+
+# Draw Circuit
+qc.draw('mpl')
+
+"""# Shor Algorithm"""
+
+# Import required libraries
+from qiskit import QuantumCircuit, transpile
+from qiskit.visualization import plot_histogram
+from qiskit_aer import AerSimulator
+from math import gcd
+import numpy as np
+
+# --------------------------
+# Step 1: Define basic parameters
+# --------------------------
+N = 15    # Number to factor
+a = 7     # Random co-prime integer with N
+
+# Function to find classical factors after period r is found
+def get_factors(N, a, r):
+    if r % 2 != 0:
+        return None
+    factor1 = gcd(pow(a, r//2) - 1, N)
+    factor2 = gcd(pow(a, r//2) + 1, N)
+    if factor1 * factor2 == N:
+        return factor1, factor2
+    else:
+        return None
+
+# --------------------------
+# Step 2: Build simple quantum circuit
+# --------------------------
+# This simplified circuit represents the quantum part that finds the period
+qc = QuantumCircuit(4, 4)
+
+# Apply Hadamard gates (superposition)
+qc.h([0, 1, 2, 3])
+
+# Example controlled unitary (placeholder for modular exponentiation)
+qc.cx(0, 3)
+qc.cx(1, 2)
+qc.cx(2, 1)
+qc.barrier()
+
+# Apply inverse Quantum Fourier Transform (QFT†) approximation
+qc.h(3)
+qc.cp(-np.pi/2, 2, 3)
+qc.h(2)
+qc.cp(-np.pi/4, 1, 3)
+qc.cp(-np.pi/2, 1, 2)
+qc.h(1)
+qc.h(0)
+
+# Measure all qubits
+qc.measure(range(4), range(4))
+
+# Draw the circuit
+qc.draw('mpl')
+display(qc.draw('mpl'))
+
+# Example of classical step after finding period r
+r = 4  # For N=15, a=7, we expect r=4
+factors = get_factors(N, a, r)
+print()
+print(f"Possible factors of {N}: {factors}")
+
