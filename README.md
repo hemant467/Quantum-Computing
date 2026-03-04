@@ -184,7 +184,17 @@ Independent Research Enthusiast – Quantum Computing & Advanced Computational S
 
 *“Scientific progress begins with disciplined curiosity.”*
 
+---
+
+## Entry Pass 🎫
+
 <img width="1545" height="2000" alt="Entry Pass IIT Tirupati HEMANT KATTA" src="https://github.com/user-attachments/assets/bc314cdb-a5b6-47e5-82eb-512dea652895" />
+
+---
+
+## 🏅 Certificate Of Completion 🎖️
+
+![🏅 Certificate 🎖️](https://github.com/user-attachments/assets/2fb4b56a-2835-4ad1-9964-4ae7d8333838)
 
 <img src="https://readme-typing-svg.herokuapp.com/?lines=Quantum+Computing+@+IIT-Tirupati;Structured+Computational+Exploration;Under+the+Guidance+of+Dr.+J.+Senthil+Kumar&font=Fira%20Code&color=%23FFD700&center=true&width=900&height=130&size=24">
 
